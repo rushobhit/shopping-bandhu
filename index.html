@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Bandhu Showcase</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <section class="project-showcase">
+    <div class="showcase-container">
+      <h2 class="project-title">Shopping Bandhu</h2>
+      <p class="project-subtitle">Project Image Showcase</p>
+
+      <div class="slider">
+        <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+
+        <div class="slides">
+          <img src="images/shopping-bandhu-1.jpeg" class="slide active" alt="Shopping Bandhu project image 1">
+          <img src="images/shopping-bandhu-2.jpeg" class="slide" alt="Shopping Bandhu project image 2">
+          <img src="images/shopping-bandhu-3.jpeg" class="slide" alt="Shopping Bandhu project image 3">
+          <img src="images/shopping-bandhu-5.jpeg" class="slide" alt="Shopping Bandhu project image 5">
+          <img src="images/shopping-bandhu-6.jpeg" class="slide" alt="Shopping Bandhu project image 6">
+          <img src="images/shopping-bandhu-8.jpeg" class="slide" alt="Shopping Bandhu project image 8">
+          <img src="images/shopping-bandhu-10.jpeg" class="slide" alt="Shopping Bandhu project image 10">
+          <img src="images/shopping-bandhu-11.jpeg" class="slide" alt="Shopping Bandhu project image 11">
+          <img src="images/shopping-bandhu-12.jpeg" class="slide" alt="Shopping Bandhu project image 12">
+          <img src="images/shopping-bandhu-13.jpeg" class="slide" alt="Shopping Bandhu project image 13">
+        </div>
+
+        <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
+      </div>
+
+      <div class="dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+            <div class="project-details">
+        <h3>About the Project</h3>
+        <p>
+          Shopping Bandhu is a self-billing machine concept developed as an IoT-based
+          product solution that combines embedded hardware with a simple web interface
+          to improve the customer billing experience.
+        </p>
+
+        <p>
+          The project was built around the idea of creating a smoother and more practical
+          retail checkout flow by connecting hardware actions with a lightweight digital interface.
+        </p>
+
+        <div class="details-grid">
+          <div class="detail-card">
+            <h4>Hardware</h4>
+            <p>
+              NodeMCU ESP8266, NFC tags, weight sensors, and servo motors were used
+              to build the physical and sensing part of the system.
+            </p>
+          </div>
+
+          <div class="detail-card">
+            <h4>Software</h4>
+            <p>
+              The system was programmed using Arduino IDE, while the web interface was
+              built using HTML, CSS, and JavaScript to display cart details and billing flow.
+            </p>
+          </div>
+
+          <div class="detail-card">
+            <h4>Objective</h4>
+            <p>
+              The main goal was to connect hardware and software into one working
+              self-billing experience that feels simple, fast, and practical.
+            </p>
+          </div>
+
+          <div class="detail-card">
+            <h4>Outcome</h4>
+            <p>
+              The project strengthened understanding of IoT product development,
+              retail automation concepts, system integration, and hands-on technical problem solving.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+  let autoSlide;
+
+  function resetSlides() {
+    slides.forEach((slide) => {
+      slide.classList.remove("active", "prev-slide", "next-slide");
+    });
+    dots.forEach((dot) => dot.classList.remove("active"));
+  }
+
+  function showSlide(index, direction = "next") {
+    resetSlides();
+
+    if (index >= slides.length) slideIndex = 0;
+    else if (index < 0) slideIndex = slides.length - 1;
+    else slideIndex = index;
+
+    slides[slideIndex].classList.add("active");
+    dots[slideIndex].classList.add("active");
+  }
+
+  function moveSlide(step) {
+    const newIndex = slideIndex + step;
+    showSlide(newIndex, step > 0 ? "next" : "prev");
+    restartAutoSlide();
+  }
+
+  function currentSlide(index) {
+    showSlide(index, index > slideIndex ? "next" : "prev");
+    restartAutoSlide();
+  }
+
+  function startAutoSlide() {
+    autoSlide = setInterval(() => {
+      showSlide(slideIndex + 1, "next");
+    }, 10000);
+  }
+
+  function restartAutoSlide() {
+    clearInterval(autoSlide);
+    startAutoSlide();
+  }
+
+  showSlide(slideIndex);
+  startAutoSlide();
+</script>
+</body>
+</html>
