@@ -7,39 +7,46 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="project-showcase">
+    <section class="showcase-container" aria-labelledby="project-title">
+      <header class="showcase-header">
+        <p class="project-eyebrow">IoT · Product Development</p>
+        <h1 class="project-title" id="project-title">Shopping Bandhu</h1>
+        <p class="project-subtitle">
+          Self-billing machine concept combining embedded hardware with a lightweight web interface.
+        </p>
+      </header>
 
-  <section class="project-showcase">
-    <div class="showcase-container">
-      <h2 class="project-title">Shopping Bandhu</h2>
-      <p class="project-subtitle">Project Image Showcase</p>
+      <section class="slider-section" aria-label="Project image gallery">
+        <div class="slider">
+          <button class="nav-btn prev" type="button" onclick="moveSlide(-1)" aria-label="Previous slide">
+            &#10094;
+          </button>
 
-      <div class="slider">
-        <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+          <div class="slides">
+            <img src="images/shopping-bandhu-1.jpeg" class="slide active" alt="Shopping Bandhu project image 1" />
+            <img src="images/shopping-bandhu-2.jpeg" class="slide" alt="Shopping Bandhu project image 2" />
+            <img src="images/shopping-bandhu-3.jpeg" class="slide" alt="Shopping Bandhu project image 3" />
+            <img src="images/shopping-bandhu-5.jpeg" class="slide" alt="Shopping Bandhu project image 5" />
+            <img src="images/shopping-bandhu-6.jpeg" class="slide" alt="Shopping Bandhu project image 6" />
+            <img src="images/shopping-bandhu-8.jpeg" class="slide" alt="Shopping Bandhu project image 8" />
+            <img src="images/shopping-bandhu-10.jpeg" class="slide" alt="Shopping Bandhu project image 10" />
+            <img src="images/shopping-bandhu-11.jpeg" class="slide" alt="Shopping Bandhu project image 11" />
+            <img src="images/shopping-bandhu-12.jpeg" class="slide" alt="Shopping Bandhu project image 12" />
+            <img src="images/shopping-bandhu-13.jpeg" class="slide" alt="Shopping Bandhu project image 13" />
+          </div>
 
-        <div class="slides">
-          <img src="images/shopping-bandhu-1.jpeg" class="slide active" alt="Shopping Bandhu project image 1">
-          <img src="images/shopping-bandhu-2.jpeg" class="slide" alt="Shopping Bandhu project image 2">
-          <img src="images/shopping-bandhu-3.jpeg" class="slide" alt="Shopping Bandhu project image 3">
-          <img src="images/shopping-bandhu-5.jpeg" class="slide" alt="Shopping Bandhu project image 5">
-          <img src="images/shopping-bandhu-6.jpeg" class="slide" alt="Shopping Bandhu project image 6">
-          <img src="images/shopping-bandhu-8.jpeg" class="slide" alt="Shopping Bandhu project image 8">
-          <img src="images/shopping-bandhu-10.jpeg" class="slide" alt="Shopping Bandhu project image 10">
-          <img src="images/shopping-bandhu-11.jpeg" class="slide" alt="Shopping Bandhu project image 11">
-          <img src="images/shopping-bandhu-12.jpeg" class="slide" alt="Shopping Bandhu project image 12">
-          <img src="images/shopping-bandhu-13.jpeg" class="slide" alt="Shopping Bandhu project image 13">
+          <button class="nav-btn next" type="button" onclick="moveSlide(1)" aria-label="Next slide">
+            &#10095;
+          </button>
         </div>
 
-        <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
-      </div>
+        <div class="dots" id="dots" aria-label="Slide navigation"></div>
+      </section>
 
-      <div class="dots">
-        <span class="dot active" onclick="currentSlide(0)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-      </div>
-            <div class="project-details">
-        <h3>About the Project</h3>
+      <section class="project-details" aria-labelledby="about-project">
+        <h2 id="about-project">About the Project</h2>
+
         <p>
           Shopping Bandhu is a self-billing machine concept developed as an IoT-based
           product solution that combines embedded hardware with a simple web interface
@@ -52,90 +59,104 @@
         </p>
 
         <div class="details-grid">
-          <div class="detail-card">
-            <h4>Hardware</h4>
+          <article class="detail-card">
+            <h3>Hardware</h3>
             <p>
               NodeMCU ESP8266, NFC tags, weight sensors, and servo motors were used
               to build the physical and sensing part of the system.
             </p>
-          </div>
+          </article>
 
-          <div class="detail-card">
-            <h4>Software</h4>
+          <article class="detail-card">
+            <h3>Software</h3>
             <p>
               The system was programmed using Arduino IDE, while the web interface was
               built using HTML, CSS, and JavaScript to display cart details and billing flow.
             </p>
-          </div>
+          </article>
 
-          <div class="detail-card">
-            <h4>Objective</h4>
+          <article class="detail-card">
+            <h3>Objective</h3>
             <p>
               The main goal was to connect hardware and software into one working
               self-billing experience that feels simple, fast, and practical.
             </p>
-          </div>
+          </article>
 
-          <div class="detail-card">
-            <h4>Outcome</h4>
+          <article class="detail-card">
+            <h3>Outcome</h3>
             <p>
               The project strengthened understanding of IoT product development,
               retail automation concepts, system integration, and hands-on technical problem solving.
             </p>
-          </div>
+          </article>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    </section>
+  </main>
 
   <script>
-  let slideIndex = 0;
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".dot");
-  let autoSlide;
+    let slideIndex = 0
+    let autoSlide
 
-  function resetSlides() {
-    slides.forEach((slide) => {
-      slide.classList.remove("active", "prev-slide", "next-slide");
-    });
-    dots.forEach((dot) => dot.classList.remove("active"));
-  }
+    const slides = document.querySelectorAll(".slide")
+    const dotsContainer = document.getElementById("dots")
+    let dots = []
 
-  function showSlide(index, direction = "next") {
-    resetSlides();
+    slides.forEach((_, i) => {
+      const dot = document.createElement("span")
+      dot.className = i === 0 ? "dot active" : "dot"
+      dot.setAttribute("role", "button")
+      dot.setAttribute("aria-label", `Go to slide ${i + 1}`)
+      dot.onclick = () => currentSlide(i)
+      dotsContainer.appendChild(dot)
+    })
 
-    if (index >= slides.length) slideIndex = 0;
-    else if (index < 0) slideIndex = slides.length - 1;
-    else slideIndex = index;
+    dots = document.querySelectorAll(".dot")
 
-    slides[slideIndex].classList.add("active");
-    dots[slideIndex].classList.add("active");
-  }
+    function resetSlides() {
+      slides.forEach((slide) => {
+        slide.classList.remove("active")
+      })
 
-  function moveSlide(step) {
-    const newIndex = slideIndex + step;
-    showSlide(newIndex, step > 0 ? "next" : "prev");
-    restartAutoSlide();
-  }
+      dots.forEach((dot) => {
+        dot.classList.remove("active")
+      })
+    }
 
-  function currentSlide(index) {
-    showSlide(index, index > slideIndex ? "next" : "prev");
-    restartAutoSlide();
-  }
+    function showSlide(index) {
+      if (index >= slides.length) slideIndex = 0
+      else if (index < 0) slideIndex = slides.length - 1
+      else slideIndex = index
 
-  function startAutoSlide() {
-    autoSlide = setInterval(() => {
-      showSlide(slideIndex + 1, "next");
-    }, 10000);
-  }
+      resetSlides()
+      slides[slideIndex].classList.add("active")
+      dots[slideIndex].classList.add("active")
+    }
 
-  function restartAutoSlide() {
-    clearInterval(autoSlide);
-    startAutoSlide();
-  }
+    function moveSlide(step) {
+      showSlide(slideIndex + step)
+      restartAutoSlide()
+    }
 
-  showSlide(slideIndex);
-  startAutoSlide();
-</script>
+    function currentSlide(index) {
+      showSlide(index)
+      restartAutoSlide()
+    }
+
+    function startAutoSlide() {
+      autoSlide = setInterval(() => {
+        showSlide(slideIndex + 1)
+      }, 5000)
+    }
+
+    function restartAutoSlide() {
+      clearInterval(autoSlide)
+      startAutoSlide()
+    }
+
+    showSlide(slideIndex)
+    startAutoSlide()
+  </script>
 </body>
 </html>
